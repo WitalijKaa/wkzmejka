@@ -36,5 +36,5 @@ function tempAjax() {
         },
         "html");
 
-    $("#wrap").load("server.php", {id: 7});
+    $("#wrap").load("server.php", {id: 7}); // догрузить в контент объекта чонибудь из сервака
 }
