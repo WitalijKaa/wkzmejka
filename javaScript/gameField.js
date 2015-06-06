@@ -1,17 +1,22 @@
 
-function GameField(size, level) {
+function GameField(fieldSize, level, cellSize) {
 
-    this.size = size || 20;
-    this.level = level || 1;
-    self = this;
+    var PX_CELL_BORDER = 1;
+
+    var pxCellSize = cellSize || 24;
+    var size = fieldSize || 20;
+    var level = level || 1;
 
     var field = [];
 
+    self = this;
+
+
     this.create = function() {
 
-        var pxFieldSize = String(26 * self.size) + "px";
+        var pxFieldSize = String((pxCellSize + PX_CELL_BORDER + PX_CELL_BORDER) * size) + "px";
         $divField = $('#gameField')
-            .css({"border": "1px solid #777", "border-radius": "4px", "width": pxFieldSize, "height": pxFieldSize});
+            .css({"border": PX_CELL_BORDER + "px solid #777", "border-radius": "4px", "width": pxFieldSize, "height": pxFieldSize});
 
         for (x = 0; x < size; x++) {
             field[x] = [];
@@ -24,7 +29,7 @@ function GameField(size, level) {
                 strY = strFormat.substring(0, strFormat.length - String(y).length) + y;
 
                 var $cell = $("<div></div>")
-                    .css({"border": "1px solid #888", "border-radius": "4px", "width": "24px", "height": "24px", "float": "left"})
+                    .css({"border": PX_CELL_BORDER + "px solid #888", "border-radius": "4px", "width": pxCellSize + "px", "height": pxCellSize + "px", "float": "left"})
                     .prop("id", "cell" + strX + "w" + strY);
 
                 $divField.append($cell);
