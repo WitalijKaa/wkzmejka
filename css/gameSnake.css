@@ -1,3 +1,25 @@
 @charset "utf-8";
 
 * { margin: 0; padding: 0; font: 20pt "Segoe WP"; }
+
+.cellEmpty { background-color: #eeeeee; }
+.cellSnakehead { background-color: #004800; }
+.cellSnakebody { background-color: #006500; }
+.cellSnaketail { background-color: #008d00; }
+.cellFood { background-color: #f00000; }
+.cellFoodbest { background-color: #f49c00; }
+.cellFoodscore { background-color: #8c008c; }
+
+#gameField {
+    margin: 10px 0 0 10px;
+    float: left;
+}
+
+#menu {
+    margin: 10px;
+    float: left;
+}
+
+#foodStandart::first-letter { color: #f00000; }
+#foodBest::first-letter { color: #f49c00; }
+#foodScore::first-letter { color: #8c008c; }

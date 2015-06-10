@@ -2,21 +2,33 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script language="JavaScript" src="javaScript/jquery-1.11.3.js"></script>
-    <script language="JavaScript" src="javaScript/gameField.js"></script>
-    <script>
-        window.onload = function() {
-            var gameField = new GameField(30, 1);
-            gameField.create();
-        }
-    </script>
+    <link rel="stylesheet" type="text/css" href="./css/gameSnake.css">
+    <script language="JavaScript" src="./javaScript/jquery-1.11.3.js"></script>
+    <script language="JavaScript" src="./javaScript/score.js"></script>
+    <script language="JavaScript" src="./javaScript/snakeFood.js"></script>
+    <script language="JavaScript" src="./javaScript/snake.js"></script>
+    <script language="JavaScript" src="./javaScript/gameField.js"></script>
+    <script language="JavaScript" src="./javaScript/gameLogica.js"></script>
+    <script language="JavaScript" src="./javaScript/onLoad.js"></script>
     <title>snake WK</title>
 </head>
 <body>
     <div id="wrap">
         <div id="gameField"></div>
         <div id="menu">
-
+            <p id="level">level 1</p>
+            <br>
+            <p id="score">score 0</p>
+            <p id="snakeLenth">lenth 3</p>
+            <br>
+            <p id="foodTotal">food</p>
+            <p id="foodStandart">food</p>
+            <p id="foodBest">food</p>
+            <p id="foodScore">food</p>
+            <br>
+            <p id="phpserver">php server offline</p>
+            <br>
+            <p>программист == Виталий Каа</p>
         </div>
     </div>
 </body>
