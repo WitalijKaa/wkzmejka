@@ -31,7 +31,7 @@ function GameField(fieldSize, cellSize) {
 
     // перекрашивает клетку DOMа зная числовые координаты клетки и ее скриптовое значение (например food или snaketail)
     this.setCell = function(x, y, value) {
-        $("#" + defineCellID(x, y)).removeClass().addClass(defineCellClassName(value));
+        $("#" + defineCellID(x, y)).attr("class", defineCellClassName(value));
     };
 
     // от простых числовых координат х у определяет валидный айдишник игровой клетки в DOMе с этими координатами формата cell001w011

@@ -20,12 +20,11 @@ function Snake(gameField) {
 
     var self = this;
 
+    // конструктор
     // создаем минимального червяка меньше которого низзя быть
-    this.create = function() {
-        body[0] = {x: gameField.fieldSize / 2 + 1, y: gameField.fieldSize / 2 + 1, value: "snakehead"};
-        body[1] = {x: body[0].x - 1, y: body[0].y, value: "snakebody"};
-        body[2] = {x: body[0].x - 2, y: body[0].y, value: "snaketail"};
-    };
+    body[0] = {x: Math.round(gameField.fieldSize / 2 + 1), y: Math.round(gameField.fieldSize / 2 + 1), value: "snakehead"};
+    body[1] = {x: body[0].x - 1, y: body[0].y, value: "snakebody"};
+    body[2] = {x: body[0].x - 2, y: body[0].y, value: "snaketail"};
 
     // змея сама знает какая у нее должна быть скорость в зависимости от сложности игры
     this.setSnakeSpeed = function(level) {

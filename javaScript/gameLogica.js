@@ -25,7 +25,6 @@ function GameLogica() {
         snakeFood = new SnakeFood(gameField, snake, snakeScore);
 
         gameField.create();
-        snake.create();
         snake.drawAllSnake(); // просто рисуем змею
         snake.setSnakeSpeed(level);
 
@@ -51,7 +50,7 @@ function GameLogica() {
                     snake.drawSnakeMove(); // перерисовка змеи по ходу движения
 
                     // проверка на Game Over
-                    if ("live" != snake.live) { clearInterval(gameTime); SendScoreToServer(); }
+                    if ("live" != snake.live) { clearInterval(gameTime); sendScoreToServer(); }
 
                     // если не умерли, то проверяем не съели ли мы кого-нибудь
                     if (snakeFood.checkEat()) {
@@ -73,17 +72,18 @@ function GameLogica() {
             }
         }, 10);
 
-        GetScoreFromServer(); // в начале игры закачиваем с пых сервака данные о прошлых играх
+        getScoreFromServer(); // в начале игры закачиваем с пых сервака данные о прошлых играх
     };
 
     // отправляем результаты игры после Гейм Овера и получаем общие данные за все игры
-    function SendScoreToServer() {
+    function sendScoreToServer() {
         $.ajax("./scoreServer.php", {
             type: "POST",
-            data: "score=" + snakeScore.score + "&food=" +
-                (snakeScore.foodStandart + snakeScore.foodBest + snakeScore.foodScore),
+            data: {
+                score: snakeScore.score,
+                food: snakeScore.foodStandart + snakeScore.foodBest + snakeScore.foodScore },
             dataType: "html",
-            timeout: 1000,
+            timeout: 10000,
             success: function(data) {
                 $("#phpserver").html(data);
             }
@@ -91,12 +91,12 @@ function GameLogica() {
     }
 
     // просто получаем данные за предыдущие игры
-    function GetScoreFromServer() {
+    function getScoreFromServer() {
         $.ajax("./scoreServer.php", {
             type: "POST",
-            data: "reading=1",
+            data: {reading: 1},
             dataType: "html",
-            timeout: 1000,
+            timeout: 10000,
             success: function(data) {
                 $("#phpserver").html(data);
             }
