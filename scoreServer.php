@@ -2,8 +2,12 @@
 
 session_start();
 
-$totalScore = (int)$_SESSION["score"];
-$totalFood = (int)$_SESSION["food"];
+if (isset($_SESSION["score"])) {
+    $totalScore = (int)$_SESSION["score"];
+    $totalFood = (int)$_SESSION["food"];
+} else {
+    $totalScore = 0; $totalFood = 0;
+}
 
 if (false == isset($_POST['reading'])) { // если это не обращение просто за данными прошедших игр
 

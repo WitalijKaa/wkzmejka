@@ -15,6 +15,7 @@ function GameLogica() {
     var timeFood; // миллисекунд с прошедшего вызова функции обрабатывающей появление и исчезновение еды
 
     this.restartGame = function() {
+
         timeSnake = 0;
         timeFood = 0;
         gamePause = false;
