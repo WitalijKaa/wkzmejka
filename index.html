@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./css/gameSnake.css">
+    <link rel="stylesheet" type="text/css" href="./javaScript/jquery-ui-1.11.4.custom/jquery-ui.css">
     <title>snake WK</title>
 </head>
 <body>
@@ -10,10 +11,14 @@
     <div id="wrap">
         <div id="gameField"></div>
         <div id="menu">
+            <div id="butPause" style="width: 200px;">play</div>
+            <div id="butRestart" style="width: 200px;">restart</div>
             <p id="level">level 1</p>
             <br>
             <p id="score">score 0</p>
             <p id="snakeLenth">lenth 3</p>
+            <p>speed:</p>
+            <div id="snakeSpeed" style="width: 650px; height: 20px;"></div>
             <br>
             <p id="foodTotal">food</p>
             <p id="foodStandart">food</p>
@@ -27,12 +32,34 @@
     </div>
 
     <script language="JavaScript" src="./javaScript/jquery-1.11.3.js"></script>
+    <script language="JavaScript" src="./javaScript/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+
+    <script>
+        $("#butPause").button();
+        $("#butRestart").button();
+        $("#snakeSpeed").progressbar({
+            min: 0,
+            max: 130,
+            value: 0
+        });
+    </script>
+
     <script language="JavaScript" src="./javaScript/score.js"></script>
     <script language="JavaScript" src="./javaScript/snakeFood.js"></script>
     <script language="JavaScript" src="./javaScript/snake.js"></script>
     <script language="JavaScript" src="./javaScript/gameField.js"></script>
     <script language="JavaScript" src="./javaScript/gameLogica.js"></script>
-    <script language="JavaScript" src="./javaScript/onLoad.js"></script>
+    <!--<script language="JavaScript" src="./javaScript/onLoad.js"></script>-->
+
+    <script>
+        var logica = new GameLogica();
+        logica.restartGame();
+        $("#butRestart").click( function() {
+            logica.resetGame();
+            logica = new GameLogica();
+            logica.restartGame();
+        });
+    </script>
 
 </body>
 </html>

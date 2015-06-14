@@ -28,7 +28,7 @@ function Snake(gameField) {
 
     // змея сама знает какая у нее должна быть скорость в зависимости от сложности игры
     this.setSnakeSpeed = function(level) {
-        self.speed = 220 - (level) * 10;
+        self.speed = 220 - level * 10;
         if (self.speed < 70) { self.speed = 70; }
     };
 

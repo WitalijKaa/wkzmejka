@@ -14,11 +14,29 @@ function GameLogica() {
     var timeSnake; // миллисекунд с прошедшего вызова функции обрабатывающей движение змейки
     var timeFood; // миллисекунд с прошедшего вызова функции обрабатывающей появление и исчезновение еды
 
+    var gameTime; // игровой таймер
+
     this.restartGame = function() {
 
         timeSnake = 0;
         timeFood = 0;
-        gamePause = false;
+
+        gamePause = true;
+
+        // вопрос: как назначить/изменить надпись кнопке ?????????
+        // единственный рабочий метод что я нашел предствален ниже
+        // но он какой-то неуклюжий
+        // а есть что-то более изящное ????????
+        // подвох: нужно чтобы высота кнопки не менялась
+        $("#butPause")
+            //.text("play")
+            //.button({text: "play"})
+            .html('<span class="ui-button-text">play</span>')
+            .click( function() { pauseOrUnpause(); } );
+        $("#snakeSpeed").progressbar({
+            value: 0
+        });
+
 
         gameField = new GameField(24, 22); // колличество клеточек, размер каждой клетки в пикселях
         snake = new Snake(gameField);
@@ -35,11 +53,12 @@ function GameLogica() {
                 case 38: snake.moveUp(); break;
                 case 39: snake.moveRight(); break;
                 case 40: snake.moveDown(); break;
-                case 80: gamePause = !gamePause; break; // кнопка Р
+                case 80: pauseOrUnpause();
+                    break; // кнопка Р
             }
         });
 
-        var gameTime = setInterval(function() { // общий игровой таймер стреляет раз в 10 миллисекунд
+        gameTime = setInterval(function() { // общий игровой таймер стреляет раз в 10 миллисекунд
             if (false == gamePause) {
 
                 timeSnake += 10;
@@ -59,6 +78,12 @@ function GameLogica() {
                         if (levelNext <= 0) {
                             levelNext = NEXT_LEVEL_STEP; level++; // переход
                             snake.setSnakeSpeed(level); // ускорение змейки
+
+                            var pBarSnakeSpeed = (level - 1) * 10;
+                            if (130 < pBarSnakeSpeed) { pBarSnakeSpeed = 130; }
+                            $("#snakeSpeed").progressbar({
+                                value: pBarSnakeSpeed
+                            });
                         }
                         // и отображение новых данных пользователю
                         $("#level").html("level: " + level + " /next in " + levelNext + "/");
@@ -75,6 +100,16 @@ function GameLogica() {
 
         getScoreFromServer(); // в начале игры закачиваем с пых сервака данные о прошлых играх
     };
+
+    this.resetGame = function() {
+        clearInterval(gameTime);
+    };
+
+    function pauseOrUnpause() {
+        gamePause = !gamePause;
+        if (gamePause) { $("#butPause").html('<span class="ui-button-text">play</span>'); }
+        else { $("#butPause").html('<span class="ui-button-text">pause</span>'); }
+    }
 
     // отправляем результаты игры после Гейм Овера и получаем общие данные за все игры
     function sendScoreToServer() {
