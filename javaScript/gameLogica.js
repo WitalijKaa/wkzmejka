@@ -23,15 +23,8 @@ function GameLogica() {
 
         gamePause = true;
 
-        // вопрос: как назначить/изменить надпись кнопке ?????????
-        // единственный рабочий метод что я нашел предствален ниже
-        // но он какой-то неуклюжий
-        // а есть что-то более изящное ????????
-        // подвох: нужно чтобы высота кнопки не менялась
         $("#butPause")
-            //.text("play")
-            //.button({text: "play"})
-            .html('<span class="ui-button-text">play</span>')
+            .button( "option", "label", "play" )
             .click( function() { pauseOrUnpause(); } );
         $("#snakeSpeed").progressbar({
             value: 0
@@ -107,8 +100,8 @@ function GameLogica() {
 
     function pauseOrUnpause() {
         gamePause = !gamePause;
-        if (gamePause) { $("#butPause").html('<span class="ui-button-text">play</span>'); }
-        else { $("#butPause").html('<span class="ui-button-text">pause</span>'); }
+        if (gamePause) { $("#butPause").button( "option", "label", "play" ); }
+        else { $("#butPause").button( "option", "label", "pause" ); }
     }
 
     // отправляем результаты игры после Гейм Овера и получаем общие данные за все игры
